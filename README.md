@@ -1,6 +1,10 @@
 # GmE 221 - Laboratory Exercise 3: 3D Computational Modeling: DEM-Vector Integration and GeoJson Service Delivery
 ## Overview
-
+This laboratory performs a 3D road‑terrain integration workflow using Python (GeoPandas, Rasterio, Shapely).
+Vector road data are retrieved from PostGIS using minimal SQL. 
+A DEM is loaded directly from a GeoTIFF file for elevation sampling. 
+Road geometries are densified, sampled for terrain height, and reconstructed as true 3D LineStrings. 
+The final 3D output is exported as a GeoJSON file for visualization in QGIS 3D View.
 ---
 
 ## Environment Setup
@@ -12,6 +16,8 @@
 
 ## How to Run
 1. Activate the virtual environment
+2. Run `analysis.py` to load the datasets, perform densification and elevation sampling, and generate the 3D geometry
+3. Load the exported roads_3d.geojson file in QGIS for 3D visualization
 
 ---
 
