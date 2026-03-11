@@ -1,6 +1,7 @@
 import geopandas as gpd
 import rasterio
 import numpy as np
+import os
 from sqlalchemy import create_engine
 from shapely.geometry import LineString, MultiLineString
 
@@ -114,3 +115,12 @@ print("3D lines created:", roads["geom_3d"].notna().sum(), "/", len(roads))
 
 # first = valid_3d.iloc[0]
 # print("First 3D coord sample:", list(first.coords)[0])
+
+os.makedirs("output", exist_ok=True)
+
+roads_3d_gdf = roads.dropna(subset=["geom_3d"]).copy()
+roads_3d_gdf = roads_3d_gdf.drop(columns=["geom"], errors="ignore")
+roads_3d_gdf = roads_3d_gdf.set_geometry("geom_3d")
+
+roads_3d_gdf.to_file("output/roads_3d.geojson", driver="GeoJSON")
+print("Saved: output/roads_3d.geojson")
